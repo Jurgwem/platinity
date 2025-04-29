@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://db36uq441ll0w"]
+
+[ext_resource type="Texture2D" uid="uid://b1gqy2vmadyd5" path="res://icon.svg" id="1_7ribk"]
+[ext_resource type="Script" uid="uid://duftn3kgojigb" path="res://SCRIPTS/player.gd" id="2_xfbtd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pcu7d"]
+size = Vector2(204, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfbtd"]
+size = Vector2(8, 8)
+
+[node name="testing" type="Node2D"]
+
+[node name="ground" type="Node2D" parent="."]
+position = Vector2(0, 242)
+scale = Vector2(4, 4)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ground"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground/StaticBody2D"]
+shape = SubResource("RectangleShape2D_pcu7d")
+
+[node name="Sprite2D" type="Sprite2D" parent="ground/StaticBody2D"]
+position = Vector2(0, -1.90735e-06)
+scale = Vector2(1.59375, 0.15625)
+texture = ExtResource("1_7ribk")
+
+[node name="player" type="RigidBody2D" parent="."]
+position = Vector2(0, -38)
+scale = Vector2(4, 4)
+script = ExtResource("2_xfbtd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+shape = SubResource("RectangleShape2D_xfbtd")
+
+[node name="Sprite2D" type="Sprite2D" parent="player"]
+scale = Vector2(0.07216, 0.07216)
+texture = ExtResource("1_7ribk")
+
+[node name="RayCast2D" type="RayCast2D" parent="player"]
+target_position = Vector2(0, 7)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -38)
+position_smoothing_enabled = true
