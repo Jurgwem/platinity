@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://db36uq441ll0w"]
+[gd_scene load_steps=9 format=3 uid="uid://db36uq441ll0w"]
 
 [ext_resource type="Texture2D" uid="uid://b1gqy2vmadyd5" path="res://icon.svg" id="1_7ribk"]
 [ext_resource type="Script" uid="uid://duftn3kgojigb" path="res://SCRIPTS/player.gd" id="2_xfbtd"]
+[ext_resource type="Texture2D" uid="uid://cuq5qi71ee8gc" path="res://SPRITES/spritesheet.png" id="3_ym1vi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pcu7d"]
 size = Vector2(204, 20)
@@ -10,6 +11,21 @@ size = Vector2(204, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xfbtd"]
 size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0yiba"]
+atlas = ExtResource("3_ym1vi")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_746ru"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0yiba")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="testing" type="Node2D"]
 
@@ -82,9 +98,9 @@ script = ExtResource("2_xfbtd")
 scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_xfbtd")
 
-[node name="Sprite2D" type="Sprite2D" parent="player"]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_7ribk")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_746ru")
 
 [node name="raycasts" type="Node2D" parent="player"]
 

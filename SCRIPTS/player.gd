@@ -49,7 +49,7 @@ func _physics_process(_delta: float) -> void:
 		linear_velocity.y += playerGravity;
 		
 	#LCJs and RCJs (omg LBP reference :O)
-	if (Input.is_action_just_pressed("Jump") or storedJump) and !is_on_ground.is_colliding() and (is_down_left.is_colliding() or is_down_right.is_colliding()):
+	if (Input.is_action_just_pressed("Jump") or storedJump) and !is_on_ground.is_colliding() and (is_down_left.is_colliding() or is_down_right.is_colliding()) and (!is_right.is_colliding() and !is_left.is_colliding()):
 		linear_velocity.y = -jumpHeight * 1.33;
 		angular_velocity = ((randf() - 0.5) * 32);
 		storedJump = false;
