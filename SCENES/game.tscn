@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=3 uid="uid://dym0qn5odcek6"]
+
+[ext_resource type="PackedScene" uid="uid://bvhrjr0m3gpyr" path="res://INST/player.tscn" id="1_2sn7y"]
+[ext_resource type="PackedScene" uid="uid://cv06w431jniyv" path="res://INST/tile.tscn" id="2_w4tjv"]
+[ext_resource type="Script" uid="uid://h5ee7dsecvye" path="res://SCRIPTS/game_manager.gd" id="3_l2rif"]
+
+[sub_resource type="Gradient" id="Gradient_l2rif"]
+colors = PackedColorArray(1, 1, 1, 1, 0.201526, 0.201527, 0.201527, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rmssh"]
+gradient = SubResource("Gradient_l2rif")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5m27e"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, 3000, 0)
+emission_shape = 3
+emission_box_extents = Vector3(4000, 1, 1)
+angle_min = -30.0
+angle_max = 30.0
+angular_velocity_min = -2.00002
+angular_velocity_max = 1.99998
+gravity = Vector3(0, -4, 0)
+scale_min = 1024.0
+scale_max = 1024.0
+color_ramp = SubResource("GradientTexture1D_rmssh")
+
+[sub_resource type="LabelSettings" id="LabelSettings_l2rif"]
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[node name="game" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_2sn7y")]
+position = Vector2(0, -32)
+
+[node name="camera" type="Camera2D" parent="."]
+position = Vector2(0, -38)
+zoom = Vector2(1.5, 1.5)
+limit_bottom = 200
+limit_smoothed = true
+position_smoothing_enabled = true
+
+[node name="bg" type="GPUParticles2D" parent="camera"]
+z_index = -100
+amount = 1024
+lifetime = 60.0
+preprocess = 60.0
+process_material = SubResource("ParticleProcessMaterial_5m27e")
+
+[node name="UI" type="Control" parent="camera"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_left = 241.0
+offset_top = 170.0
+offset_right = 281.0
+offset_bottom = 210.0
+rotation = -0.354884
+
+[node name="curr" type="Label" parent="camera/UI"]
+offset_left = -379.0
+offset_top = -206.0
+offset_right = -286.0
+offset_bottom = -161.0
+text = "PTS: "
+label_settings = SubResource("LabelSettings_l2rif")
+
+[node name="best" type="Label" parent="camera/UI"]
+offset_left = -379.0
+offset_top = -228.0
+offset_right = -286.0
+offset_bottom = -183.0
+text = "BEST: "
+label_settings = SubResource("LabelSettings_l2rif")
+
+[node name="tries" type="Label" parent="camera/UI"]
+layout_mode = 0
+offset_left = -379.0
+offset_top = -249.0
+offset_right = -286.0
+offset_bottom = -204.0
+text = "TRIES:"
+label_settings = SubResource("LabelSettings_l2rif")
+
+[node name="start_platform" type="Node2D" parent="."]
+
+[node name="tile" parent="start_platform" instance=ExtResource("2_w4tjv")]
+type = "block"
+
+[node name="tile2" parent="start_platform" instance=ExtResource("2_w4tjv")]
+position = Vector2(-32, 0)
+type = "block"
+
+[node name="tile3" parent="start_platform" instance=ExtResource("2_w4tjv")]
+position = Vector2(32, 0)
+type = "block"
+
+[node name="tile4" parent="start_platform" instance=ExtResource("2_w4tjv")]
+position = Vector2(64, 0)
+type = "semi"
+
+[node name="tile5" parent="start_platform" instance=ExtResource("2_w4tjv")]
+position = Vector2(-64, 0)
+type = "semi"
+
+[node name="gameManager" type="Node2D" parent="."]
+script = ExtResource("3_l2rif")

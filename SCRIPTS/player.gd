@@ -85,9 +85,12 @@ func _physics_process(_delta: float) -> void:
 			linear_velocity.x += speed;
 			rotate(0.05)
 	
-	print("storedJump: ", storedJump);
-	print("lastWallJump: ", lastWallJump);
-	print("vVel.: ", linear_velocity.y);
-	print("xVel.: ", linear_velocity.x);
+	#print("storedJump: ", storedJump);
+	#print("lastWallJump: ", lastWallJump);
+	#print("vVel.: ", linear_velocity.y);
+	#print("xVel.: ", linear_velocity.x);
+	if position.y > 500:
+		globals.deaths += 1;
+		get_tree().change_scene_to_file("res://SCENES/game.tscn");
 	return
 	

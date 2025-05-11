@@ -11,14 +11,17 @@ config_version=5
 [application]
 
 config/name="platformer"
-run/main_scene="uid://db36uq441ll0w"
+run/main_scene="uid://dym0qn5odcek6"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+globals="*res://SCRIPTS/global.gd"
+
 [display]
 
-window/size/resizable=false
-window/size/always_on_top=true
+window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
 [input]
