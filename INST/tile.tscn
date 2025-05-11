@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cv06w431jniyv"]
+[gd_scene load_steps=15 format=3 uid="uid://cv06w431jniyv"]
 
 [ext_resource type="Script" uid="uid://cnhg0ey3pusgn" path="res://SCRIPTS/tile.gd" id="1_rfhqj"]
 [ext_resource type="Texture2D" uid="uid://cuq5qi71ee8gc" path="res://SPRITES/spritesheet.png" id="2_rjfmn"]
@@ -67,6 +67,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rfhqj"]
+a = Vector2(-4, -4)
+b = Vector2(4, -4)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0yiba"]
 size = Vector2(8, 8)
 
@@ -74,6 +78,7 @@ size = Vector2(8, 8)
 size = Vector2(4.5, 4.5)
 
 [node name="tile" type="Node2D"]
+z_index = 50
 scale = Vector2(4, 4)
 script = ExtResource("1_rfhqj")
 
@@ -83,6 +88,12 @@ frame = 7
 frame_progress = 1.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="semiHitbox" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_rfhqj")
+disabled = true
+one_way_collision = true
+one_way_collision_margin = 5.0
 
 [node name="hitbox" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_0yiba")

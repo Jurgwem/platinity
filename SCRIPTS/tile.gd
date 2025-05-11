@@ -22,7 +22,8 @@ func _ready() -> void:
 			$AnimatedSprite2D.frame = 2;
 		elif (chance > (4.0 * 1.0/10.0)):
 			type = "semi";
-			$StaticBody2D/hitbox.one_way_collision = true;
+			$StaticBody2D/hitbox.disabled = true;
+			$StaticBody2D/semiHitbox.disabled = false;
 			$AnimatedSprite2D.frame = 3;
 		elif (chance > (3.0 * 1.0/10.0)):
 			type = "boost_r"
@@ -51,8 +52,8 @@ func _ready() -> void:
 				pass;
 			"semi":
 				$AnimatedSprite2D.frame = 3;
-				$StaticBody2D/hitbox.one_way_collision = true;
-				$StaticBody2D/hitbox.one_way_collision_margin = 5;
+				$StaticBody2D/hitbox.disabled = true;
+				$StaticBody2D/semiHitbox.disabled = false;
 				pass;
 			"boost_r":
 				$StaticBody2D/hitbox.disabled = true;
@@ -75,7 +76,6 @@ func _ready() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "player":
 		if type == "spike":
-			print("you are dead");
 			globals.deaths += 1;
 			get_tree().change_scene_to_file("res://SCENES/game.tscn");
 			

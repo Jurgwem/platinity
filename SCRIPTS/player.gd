@@ -11,7 +11,7 @@ extends RigidBody2D
 var playerGravity : float = 12;
 var jumpHeight : float = 666;
 var wallJumpHeight : float = 400;
-var speed : float = 150;
+var speed : float = 100;
 var friction : float = 0.5;
 var airResistance : float = 0.92;
 var maxSpeed : int = 300;
@@ -39,6 +39,10 @@ func _physics_process(_delta: float) -> void:
 			linear_velocity.x *= friction;
 		else:
 			linear_velocity.x *= airResistance;
+			
+	if Input.is_action_just_pressed("restart"):
+		globals.deaths += 1;
+		get_tree().change_scene_to_file("res://SCENES/game.tscn");
 	
 	#Jumping
 	if (Input.is_action_just_pressed("Jump") or storedJump) and is_on_ground.is_colliding():

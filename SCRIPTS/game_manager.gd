@@ -12,7 +12,7 @@ func _ready() -> void:
 			add_child(tile);
 	pass
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	points = $"../player".position.x / 32;
 	
 	if globals.best < points:

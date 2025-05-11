@@ -29,6 +29,7 @@ outline_size = 12
 outline_color = Color(0, 0, 0, 1)
 
 [node name="game" type="Node2D"]
+position = Vector2(0, -180)
 
 [node name="player" parent="." instance=ExtResource("1_2sn7y")]
 position = Vector2(0, -32)
@@ -56,8 +57,10 @@ offset_top = 170.0
 offset_right = 281.0
 offset_bottom = 210.0
 rotation = -0.354884
+metadata/_edit_use_anchors_ = true
 
 [node name="curr" type="Label" parent="camera/UI"]
+layout_mode = 0
 offset_left = -379.0
 offset_top = -206.0
 offset_right = -286.0
@@ -66,6 +69,7 @@ text = "PTS: "
 label_settings = SubResource("LabelSettings_l2rif")
 
 [node name="best" type="Label" parent="camera/UI"]
+layout_mode = 0
 offset_left = -379.0
 offset_top = -228.0
 offset_right = -286.0
@@ -104,4 +108,5 @@ position = Vector2(-64, 0)
 type = "semi"
 
 [node name="gameManager" type="Node2D" parent="."]
+position = Vector2(0, 192)
 script = ExtResource("3_l2rif")
