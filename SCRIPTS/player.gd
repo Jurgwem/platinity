@@ -32,7 +32,7 @@ func _physics_process(_delta: float) -> void:
 	#Reset wall jump direction
 	if is_on_ground.is_colliding():
 		lastWallJump = "none";
-	
+		
 	#Gravity
 	if linear_velocity.x != 0:
 		if is_on_ground.is_colliding():
@@ -93,8 +93,11 @@ func _physics_process(_delta: float) -> void:
 	#print("lastWallJump: ", lastWallJump);
 	#print("vVel.: ", linear_velocity.y);
 	#print("xVel.: ", linear_velocity.x);
-	if position.y > 500:
+	if position.y > 500 or position.y < -3100:
 		globals.deaths += 1;
 		get_tree().change_scene_to_file("res://SCENES/game.tscn");
 	return
 	
+func flipRays() -> void:
+	$raycasts.scale.y *= -1;
+	pass

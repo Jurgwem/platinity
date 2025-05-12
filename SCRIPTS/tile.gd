@@ -13,27 +13,35 @@ func _ready() -> void:
 			pass;
 		$AnimatedSprite2D.frame = 0;
 		chance = randf();
-		if (chance > (7.0 * 1.0/10.0)):
+		if (chance > (70.0 * 1.0/100.0)):
 			type = "block"
 			$AnimatedSprite2D.frame = 1;
-		elif (chance > (6.0 * 1.0/10.0)):
+		elif (chance > (60.0 * 1.0/100.0)):
 			type = "spike";
 			$StaticBody2D/hitbox.disabled = true;
 			$AnimatedSprite2D.frame = 2;
-		elif (chance > (4.0 * 1.0/10.0)):
+		elif (chance > (45.0 * 1.0/100.0)):
 			type = "semi";
 			$StaticBody2D/hitbox.disabled = true;
 			$StaticBody2D/semiHitbox.disabled = false;
 			$AnimatedSprite2D.frame = 3;
-		elif (chance > (3.0 * 1.0/10.0)):
+		elif (chance > (30.1 * 1.0/100.0)):
+			exists = randf();
+			if exists > 0.1:
+				queue_free();
+				pass;
+			type = "flip";
+			$StaticBody2D/hitbox.disabled = true;
+			$AnimatedSprite2D.frame = 8;	
+		elif (chance > (30.0 * 1.0/100.0)):
 			type = "boost_r"
 			$StaticBody2D/hitbox.disabled = true;
 			$AnimatedSprite2D.frame = 4;
-		elif (chance > (2.0 * 1.0/10.0)):
+		elif (chance > (20.0 * 1.0/100.0)):
 			type = "boost_u";
 			$StaticBody2D/hitbox.disabled = true;
 			$AnimatedSprite2D.frame = 5;
-		elif (chance > (1.0 * 1.0/10.0)):
+		elif (chance > (10.0 * 1.0/100.0)):
 			type = "boost_l"
 			$StaticBody2D/hitbox.disabled = true;
 			$AnimatedSprite2D.frame = 6;
@@ -71,6 +79,10 @@ func _ready() -> void:
 				$StaticBody2D/hitbox.disabled = true;
 				$AnimatedSprite2D.frame = 7;
 				pass;
+			"flip":
+				$StaticBody2D/hitbox.disabled = true;
+				$AnimatedSprite2D.frame = 8;
+				pass;
 	pass;
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -78,6 +90,13 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if type == "spike":
 			globals.deaths += 1;
 			get_tree().change_scene_to_file("res://SCENES/game.tscn");
+		
+		if type == "flip":
+			body.playerGravity *= -1;
+			body.gravity_scale  *= -1;
+			body.jumpHeight *= -1;
+			body.wallJumpHeight *= -1;
+			body.flipRays();
 			
 		if type == "boost_u":
 			body.linear_velocity.y = -boost;

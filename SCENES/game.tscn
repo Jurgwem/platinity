@@ -29,7 +29,6 @@ outline_size = 12
 outline_color = Color(0, 0, 0, 1)
 
 [node name="game" type="Node2D"]
-position = Vector2(0, -180)
 
 [node name="player" parent="." instance=ExtResource("1_2sn7y")]
 position = Vector2(0, -32)
@@ -37,6 +36,7 @@ position = Vector2(0, -32)
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(0, -38)
 zoom = Vector2(1.5, 1.5)
+limit_top = -2986
 limit_bottom = 200
 limit_smoothed = true
 position_smoothing_enabled = true

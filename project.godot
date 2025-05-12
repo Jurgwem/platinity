@@ -15,7 +15,7 @@ run/main_scene="uid://dym0qn5odcek6"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="uid://cxy0c5f2l03e7"
-config/icon="res://icon.svg"
+config/icon="uid://dxcx1uvshih2c"
 config/macos_native_icon="uid://dxcx1uvshih2c"
 config/windows_native_icon="uid://dxcx1uvshih2c"
 
