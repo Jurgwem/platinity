@@ -28,7 +28,7 @@ func _physics_process(_delta: float) -> void:
 		for n in range(genCount, (points + spawnOffset)):
 			for y in 100:
 				var tile : Node2D = tileResource.instantiate();
-				tile.position = Vector2(100 + step * n, -step * y);
+				tile.position = Vector2(96 + step * n, -step * y);
 				add_child(tile);
 		genCount = points + spawnOffset;
 	pass

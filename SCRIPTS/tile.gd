@@ -15,6 +15,7 @@ func _ready() -> void:
 		chance = randf();
 		if (chance > (70.0 * 1.0/100.0)):
 			type = "block"
+			$Area2D.queue_free();
 			$AnimatedSprite2D.frame = 1;
 		elif (chance > (60.0 * 1.0/100.0)):
 			type = "spike";
@@ -22,6 +23,7 @@ func _ready() -> void:
 			$AnimatedSprite2D.frame = 2;
 		elif (chance > (45.0 * 1.0/100.0)):
 			type = "semi";
+			$Area2D.queue_free();
 			$StaticBody2D/hitbox.disabled = true;
 			$StaticBody2D/semiHitbox.disabled = false;
 			$AnimatedSprite2D.frame = 3;
@@ -53,12 +55,14 @@ func _ready() -> void:
 		match type:
 			"block":
 				$AnimatedSprite2D.frame = 1;
+				$Area2D.queue_free();
 				pass;
 			"spike":
 				$AnimatedSprite2D.frame = 2;
 				$StaticBody2D/hitbox.disabled = true;
 				pass;
 			"semi":
+				$Area2D.queue_free();
 				$AnimatedSprite2D.frame = 3;
 				$StaticBody2D/hitbox.disabled = true;
 				$StaticBody2D/semiHitbox.disabled = false;
