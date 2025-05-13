@@ -55,7 +55,7 @@ func _physics_process(_delta: float) -> void:
 	#LCJs and RCJs (omg LBP reference :O)
 	if (Input.is_action_just_pressed("Jump") or storedJump) and !is_on_ground.is_colliding() and (is_down_left.is_colliding() or is_down_right.is_colliding()) and (!is_right.is_colliding() and !is_left.is_colliding()):
 		linear_velocity.y = -jumpHeight * 1.33;
-		angular_velocity = ((randf() - 0.5) * 32);
+		angular_velocity = ((randf() - 0.5) * 8);
 		storedJump = false;
 	
 	#Store Jump if airborne
@@ -82,18 +82,26 @@ func _physics_process(_delta: float) -> void:
 	
 	#Left / Right
 	if linear_velocity.x >= -maxSpeed and Input.is_action_pressed("Left") and !is_left.is_colliding():
+		if is_on_ground.is_colliding():
 			linear_velocity.x -= speed;	
-			rotate(-0.05)
+			rotate(-0.05);
+		else:
+			linear_velocity.x -= 0.5 * speed;
+			angular_velocity -= 1;
 		
 	if linear_velocity.x <= maxSpeed and Input.is_action_pressed("Right") and !is_right.is_colliding():
+		if is_on_ground.is_colliding():
 			linear_velocity.x += speed;
-			rotate(0.05)
+			rotate(0.05);
+		else:
+			linear_velocity.x += 0.5 * speed;
+			angular_velocity += 1;
 	
 	#print("storedJump: ", storedJump);
 	#print("lastWallJump: ", lastWallJump);
 	#print("vVel.: ", linear_velocity.y);
 	#print("xVel.: ", linear_velocity.x);
-	if position.y > 500 or position.y < -3100:
+	if position.y > 500 or position.y < -3150:
 		globals.deaths += 1;
 		get_tree().change_scene_to_file("res://SCENES/game.tscn");
 	return
@@ -101,3 +109,8 @@ func _physics_process(_delta: float) -> void:
 func flipRays() -> void:
 	$raycasts.scale.y *= -1;
 	pass
+	
+func death() -> void:
+	globals.deaths += 1;
+	get_tree().change_scene_to_file("res://SCENES/game.tscn");
+	pass;

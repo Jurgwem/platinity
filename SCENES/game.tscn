@@ -4,6 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://cv06w431jniyv" path="res://INST/tile.tscn" id="2_w4tjv"]
 [ext_resource type="Script" uid="uid://h5ee7dsecvye" path="res://SCRIPTS/game_manager.gd" id="3_l2rif"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_l2rif"]
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="Gradient" id="Gradient_l2rif"]
 colors = PackedColorArray(1, 1, 1, 1, 0.201526, 0.201527, 0.201527, 1)
 
@@ -24,29 +28,18 @@ scale_min = 1024.0
 scale_max = 1024.0
 color_ramp = SubResource("GradientTexture1D_rmssh")
 
-[sub_resource type="LabelSettings" id="LabelSettings_l2rif"]
-outline_size = 12
-outline_color = Color(0, 0, 0, 1)
-
 [node name="game" type="Node2D"]
 
 [node name="player" parent="." instance=ExtResource("1_2sn7y")]
-position = Vector2(0, -32)
+position = Vector2(0, -28)
 
 [node name="camera" type="Camera2D" parent="."]
-position = Vector2(0, -38)
-zoom = Vector2(1.5, 1.5)
+position = Vector2(0, -28)
+zoom = Vector2(1.2, 1.2)
 limit_top = -2986
 limit_bottom = 200
 limit_smoothed = true
 position_smoothing_enabled = true
-
-[node name="bg" type="GPUParticles2D" parent="camera"]
-z_index = -100
-amount = 1024
-lifetime = 60.0
-preprocess = 60.0
-process_material = SubResource("ParticleProcessMaterial_5m27e")
 
 [node name="UI" type="Control" parent="camera"]
 z_index = 100
@@ -85,6 +78,14 @@ offset_right = -286.0
 offset_bottom = -204.0
 text = "TRIES:"
 label_settings = SubResource("LabelSettings_l2rif")
+
+[node name="bg" type="GPUParticles2D" parent="camera"]
+z_index = -100
+amount = 1024
+lifetime = 60.0
+preprocess = 60.0
+visibility_rect = Rect2(-10000, -10000, 20000, 20000)
+process_material = SubResource("ParticleProcessMaterial_5m27e")
 
 [node name="start_platform" type="Node2D" parent="."]
 
